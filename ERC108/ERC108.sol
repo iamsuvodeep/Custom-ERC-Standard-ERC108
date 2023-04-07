@@ -54,7 +54,6 @@ contract ERC108{
 
     function transferMoney(address to, uint _amount, string memory _currenyLogo) public returns(bytes32 txHash){
         require(to != msg.sender,"Self transfer is not allowed");
-        ___currencyOnwer = msg.sender;
         bytes32 _currencyHash = getCurrencyHash(_currenyLogo);
         address _currecyOnwer = currencyNameById[_currencyHash].onwer;
         txHash = keccak256(abi.encodePacked(to,_amount,block.timestamp));
@@ -142,6 +141,7 @@ contract ERC108{
 
     function  mint(string memory _currencyName, string memory _logo, uint _amount) public{
         currencyName = _currencyName;
+        ___currencyOnwer = msg.sender;
         logo = _logo;
         amount = _amount;
         bytes32 _currencyHash = keccak256(abi.encodePacked( _logo));
